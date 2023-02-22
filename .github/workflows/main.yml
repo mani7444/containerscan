@@ -16,7 +16,15 @@ jobs:
     
     - uses: Azure/docker-login@v1
       with:
-        login-server: ${{ secrets.ACR_LOGIN_SERVER }}
+        login-server: ${{ ACR_LOGIN_SERVER }}
         username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }} 
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    
+    - run: docker push containerscandemo.azurecr.io/mypythonapp       
 
+    - name: Scan image
+      uses: Azure/container-scan@v0
+      with:
+        image-name: ${{ secrets.ACR_LOGIN_SERVER }}/mypythonapp
+        severity-threshold: CRITICAL
+        run-quality-checks: true
