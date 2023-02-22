@@ -1,31 +1,9 @@
-on:
-  - push
+on: [push]
+
 jobs:
   build-secure-and-push:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - run: docker build . -t
-          tipsandtrickscontainerregistry.azurecr.io/tipsandtrickscontainer:${{
-          github.sha }}
-      - uses: Azure/container-scan@v0
-        id: container-scan
-        continue-on-error: true
-        with:
-          image-name: tipsandtrickscontainerregistry.azurecr.io/tipsandtrickscontainer:${{
-            github.sha }}
-      - uses: Azure/docker-login@v1
-        with:
-          login-server: ${{ ACR_LOGIN_SERVER }}
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
-      - run: docker push
-          tipsandtrickscontainerregistry.azurecr.io/tipsandtrickscontainer:${{
-          github.sha }}
-      - name: Scan image
-        uses: Azure/container-scan@v0
-        with:
-          image-name: ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic:${{
-            github.run_number }}
-          severity-threshold: CRITICAL
-          run-quality-checks: true
+    - uses: actions/checkout@master
+
+    - run: docker build . -t mypythonapp
