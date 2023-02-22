@@ -7,3 +7,9 @@ jobs:
     - uses: actions/checkout@master
 
     - run: docker build . -t mypythonapp
+      
+    - uses: Azure/container-scan@v0
+      id: container-scan
+      continue-on-error: true
+      with:
+        image-name: mypythonapp
