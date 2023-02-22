@@ -16,7 +16,7 @@ jobs:
     
     - uses: Azure/docker-login@v1
       with:
-        login-server: ${{ ACR_LOGIN_SERVER }}
+        login-server: ${{ secrets.ACR_LOGIN_SERVER }}
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     
