@@ -12,7 +12,7 @@ jobs:
       id: container-scan
       continue-on-error: true
       with:
-        image-name: mypythonapp
+        image-name: containerscandemo.azurecr.io/mypythonapp
     
     - uses: Azure/docker-login@v1
       with:
@@ -21,14 +21,11 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - name: Push image
       run: |
-        docker push ${{ secrets.ACR_LOGIN_SERVER }}/mypythonapp:${{ github.run_number }}
+        docker push ${{ secrets.ACR_LOGIN_SERVER }}/containerscandemo.azurecr.io/mypythonapp:${{ github.run_number }}
     
     - name: Scan image
       uses: Azure/container-scan@v0
       with:
-        image-name: ${{ secrets.ACR_LOGIN_SERVER }}/mypythonapp
+        image-name: ${{ secrets.ACR_LOGIN_SERVER }}/containerscandemo.azurecr.io/mypythonapp
         severity-thr	eshold: CRITICAL
         run-quality-checks: true
-    - name: Push image
-      run: |
-        docker push ${{ secrets.ACR_LOGIN_SERVER }}/mypythonapp:${{ github.run_number }}
