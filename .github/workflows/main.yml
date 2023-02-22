@@ -13,3 +13,10 @@ jobs:
       continue-on-error: true
       with:
         image-name: mypythonapp
+    
+    - uses: Azure/docker-login@v1
+      with:
+        login-server: ${{ ACR_LOGIN_SERVER }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+
