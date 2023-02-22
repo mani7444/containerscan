@@ -25,6 +25,6 @@ jobs:
     - name: Scan image
       uses: Azure/container-scan@v0
       with:
-        image-name: ${{ secrets.ACR_LOGIN_SERVER }}/mypythonapp
+        image-name: ${{ secrets.ACR_LOGIN_SERVER }}/mypythonapp:${{ github.run_number }}
         severity-threshold: CRITICAL
         run-quality-checks: true
