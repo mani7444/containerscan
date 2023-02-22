@@ -19,12 +19,16 @@ jobs:
         login-server: ${{ secrets.ACR_LOGIN_SERVER }}
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
+    - name: Push image
+      run: |
+        docker push ${{ secrets.ACR_LOGIN_SERVER }}/mypythonapp:${{ github.run_number }}
     
-    - run: docker push containerscandemo.azurecr.io/mypythonapp       
-
     - name: Scan image
       uses: Azure/container-scan@v0
       with:
-        image-name: ${{ secrets.ACR_LOGIN_SERVER }}/mypythonapp:${{ github.run_number }}
-        severity-threshold: CRITICAL
+        image-name: ${{ secrets.ACR_LOGIN_SERVER }}/mypythonapp
+        severity-thr	eshold: CRITICAL
         run-quality-checks: true
+    - name: Push image
+      run: |
+        docker push ${{ secrets.ACR_LOGIN_SERVER }}/mypythonapp:${{ github.run_number }}
