@@ -12,7 +12,7 @@ jobs:
       id: container-scan
       continue-on-error: true
       with:
-        image-name: ${{ secrets.ACR_LOGIN_SERVER }}/containerscandemo.azurecr.io/mypythonapp
+        image-name: ${{ secrets.ACR_LOGIN_SERVER }}/containerscandemo.azurecr.io/mypythonapp:latest
         
         
     - uses: Azure/docker-login@v1
@@ -22,7 +22,7 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - name: Push image
       run: |
-        docker push ${{ secrets.ACR_LOGIN_SERVER }}/containerscandemo.azurecr.io/mypythonapp:${{ github.run_number }}
+        docker push ${{ secrets.ACR_LOGIN_SERVER }}/containerscandemo.azurecr.io/mypythonapp:latest:${{ github.run_number }}
     
         
         
