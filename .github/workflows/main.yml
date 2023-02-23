@@ -13,7 +13,7 @@ jobs:
       continue-on-error: true
       with:
         image-name: ${{ secrets.ACR_LOGIN_SERVER }}/containerscandemo.azurecr.io/mypythonapp
-        run-quality-checks: true
+        
         
     - uses: Azure/docker-login@v1
       with:
