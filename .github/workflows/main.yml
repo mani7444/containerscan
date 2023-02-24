@@ -18,7 +18,7 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - run: docker push containerscandemo.azurecr.io/mypythonapp
       - name: Run ACR scan
-        uses: azure/container-scan@v0.1.0
+        uses: azure/container-scan@v0
         with:
           registry: containerscandemo.azurecr.io
           image: mypythonapp:mypythonapp:latest
