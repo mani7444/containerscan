@@ -26,14 +26,4 @@ jobs:
           fail-on: High
           token: ${{ secrets.AZURE_CREDENTIALS }}
          
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Azure Login
-        uses: azure/login@v1
-        with: null
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Run ASC scan
-        uses: Azure/security-center@v1
-        with:
-          auto-discover: true
-          scan: true
+    
